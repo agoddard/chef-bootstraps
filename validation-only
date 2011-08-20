@@ -1,0 +1,30 @@
+bash -c '
+mkdir -p /etc/chef
+mkdir -p /etc/ohai/plugins
+mkdir -p /var/log/chef
+
+(
+cat <<'EOP'
+<%= IO.read(Chef::Config[:validation_key]) %>
+EOP
+) > /tmp/validation.pem
+awk NF /tmp/validation.pem > /etc/chef/validation.pem
+rm /tmp/validation.pem
+
+(
+cat <<'EOP'
+log_level        :info
+log_location     STDOUT
+Ohai::Config[:plugin_path] << "/etc/ohai/plugins"
+chef_server_url  "<%= Chef::Config[:chef_server_url] %>"
+validation_client_name "<%= Chef::Config[:validation_client_name] %>"
+<% if @config[:chef_node_name] == nil %>
+# Using default node name"
+<% else %>
+node_name "<%= @config[:chef_node_name] %>"
+<% end %>
+<% if Chef::Config[:environment] != nil %>
+environment "<%= Chef::Config[:environment]%>"
+<% end %>
+EOP
+) > /etc/chef/client.rb

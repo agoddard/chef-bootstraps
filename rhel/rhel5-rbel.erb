@@ -1,0 +1,32 @@
+bash -c '
+if [ ! -f /usr/bin/chef-client ]; then
+  cd /tmp
+  rpm -Uvh http://rbel.frameos.org/rbel5
+  yum install -y ruby rubygem-chef ntp
+fi
+
+mkdir -p /etc/chef
+
+(
+cat <<'EOP'
+<%= validation_key %>
+EOP
+) > /tmp/validation.pem
+awk NF /tmp/validation.pem > /etc/chef/validation.pem
+rm /tmp/validation.pem
+
+(
+cat <<'EOP'
+<%= config_content %>
+EOP
+) > /etc/chef/client.rb
+
+(
+cat <<'EOP'
+<%= { "run_list" => @run_list }.to_json %>
+EOP
+) > /etc/chef/first-boot.json
+
+ntpdate -s pool.ntp.org
+chkconfig chef-client on
+service chef-client start'
