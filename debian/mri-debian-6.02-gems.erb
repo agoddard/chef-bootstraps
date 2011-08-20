@@ -1,5 +1,5 @@
 bash -c '
-
+source /etc/profile
 if [ ! -f /usr/bin/chef-client ]; then
   apt-get update
   apt-get install -y ruby ruby1.8-dev build-essential wget libruby-extras libruby1.8-extras
@@ -48,5 +48,5 @@ EOP
 mkdir -p /etc/ohai/plugins
 mkdir /var/log/chef
 
-/usr/local/bin/chef-client -j /etc/chef/first-boot.json'
-/usr/local/bin/ruby /usr/local/bin/chef-client -L /var/log/chef/client.log -d -c /etc/chef/client.rb -i 1800 -s 20
+/usr/bin/chef-client -j /etc/chef/first-boot.json'
+#/usr/bin/ruby /usr/bin/chef-client -L /var/log/chef/client.log -d -c /etc/chef/client.rb -i 1800 -s 20
