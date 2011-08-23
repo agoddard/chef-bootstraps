@@ -1,6 +1,7 @@
 bash -c '
-apt-get -y install build-essential wget
-if [ ! -f /usr/bin/chef-client ]; then
+source /etc/profile
+apt-get update;apt-get -y install build-essential wget
+if [ ! -f /usr/local/bin/chef-client ]; then
   cd /tmp
   wget http://rubyenterpriseedition.googlecode.com/files/ruby-enterprise_1.8.7-2011.03_amd64_ubuntu10.04.deb
   dpkg -i ruby-enterprise_1.8.7-2011.03_amd64_ubuntu10.04.deb
@@ -48,6 +49,6 @@ EOP
 mkdir -p /etc/ohai/plugins
 mkdir /var/log/chef
 
-/usr/bin/chef-client -j /etc/chef/first-boot.json'
+/usr/local/bin/chef-client -j /etc/chef/first-boot.json'
 
-/usr/bin/ruby /usr/bin/chef-client -L /var/log/chef/client.log -d -c /etc/chef/client.rb -i 1800 -s 20
+#/usr/local/bin/ruby /usr/local/bin/chef-client -L /var/log/chef/client.log -d -c /etc/chef/client.rb -i 1800 -s 20
