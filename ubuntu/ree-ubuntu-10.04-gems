@@ -1,5 +1,5 @@
 bash -c '
-source /etc/profile
+date <%= Time.now.strftime("%m%d%k%M%Y.00") %>
 apt-get update;apt-get -y install build-essential wget
 if [ ! -f /usr/local/bin/chef-client ]; then
   cd /tmp
@@ -51,4 +51,3 @@ mkdir /var/log/chef
 
 /usr/local/bin/chef-client -j /etc/chef/first-boot.json'
 
-#/usr/local/bin/ruby /usr/local/bin/chef-client -L /var/log/chef/client.log -d -c /etc/chef/client.rb -i 1800 -s 20
