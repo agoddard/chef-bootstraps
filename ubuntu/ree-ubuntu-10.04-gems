@@ -1,5 +1,5 @@
 bash -c '
-date <%= Time.now.strftime("%m%d%k%M%Y.00") %>
+date <%= Time.now.strftime("%m%d%H%M%Y.00") %>
 apt-get update;apt-get -y install build-essential wget
 if [ ! -f /usr/local/bin/chef-client ]; then
   cd /tmp
