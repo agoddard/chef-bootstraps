@@ -1,4 +1,5 @@
 bash -c '
+TZ='America/New_York'; export TZ
 date <%= Time.now.strftime("%m%d%k%M%Y.00") %>
 if [ ! -f /usr/bin/chef-client ]; then
   apt-get update
