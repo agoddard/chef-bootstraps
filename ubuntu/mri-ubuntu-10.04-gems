@@ -1,6 +1,6 @@
 bash -c '
 TZ='America/New_York'; export TZ
-date <%= (Time.now.utc - 14400).strftime("%m%d%H%M%Y.00") %>
+date <%= (Time.now.utc - 18000).strftime("%m%d%H%M%Y.00") %>
 if [ ! -f /usr/bin/chef-client ]; then
   apt-get update
   apt-get install -y ruby ruby1.8-dev build-essential wget libruby-extras libruby1.8-extras
