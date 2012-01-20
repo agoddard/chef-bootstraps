@@ -47,6 +47,9 @@ EOP
 ) > /etc/chef/first-boot.json
 
 mkdir -p /etc/ohai/plugins
-mkdir /var/log/chef
+
+if [ ! -d '/var/log/chef' ]; then 
+	mkdir /var/log/chef
+fi
 
 /usr/bin/chef-client -j /etc/chef/first-boot.json'
