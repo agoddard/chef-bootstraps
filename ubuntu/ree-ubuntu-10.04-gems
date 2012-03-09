@@ -10,7 +10,7 @@ if [ ! -f /usr/local/bin/chef-client ]; then
   cd rubygems-1.7.2
   ruby setup.rb --no-format-executable
 fi
-gem install ohai chef --no-rdoc --no-ri <%= '--prerelease' if @config[:prerelease] %>
+gem install json ohai chef --no-rdoc --no-ri <%= '--prerelease' if @config[:prerelease] %>
 
 mkdir -p /etc/chef
 
