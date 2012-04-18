@@ -6,9 +6,9 @@ if [ ! -f /usr/bin/chef-client ]; then
   cd /tmp
   wget http://rubyenterpriseedition.googlecode.com/files/ruby-enterprise_1.8.7-2011.03_amd64_debian6.0.deb
   dpkg -i ruby-enterprise_1.8.7-2011.03_amd64_debian6.0.deb
-  wget http://production.cf.rubygems.org/rubygems/rubygems-1.7.2.tgz
-  tar zxf rubygems-1.7.2.tgz
-  cd rubygems-1.7.2
+  wget http://production.cf.rubygems.org/rubygems/rubygems-1.8.21.tgz
+  tar zxf rubygems-1.8.21.tgz
+  cd rubygems-1.8.21
   ruby setup.rb --no-format-executable
 fi
 gem install ohai chef --no-rdoc --no-ri <%= '--prerelease' if @config[:prerelease] %>

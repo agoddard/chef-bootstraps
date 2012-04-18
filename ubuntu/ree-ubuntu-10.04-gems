@@ -1,16 +1,16 @@
 bash -c '
-date <%= Time.now.strftime("%m%d%H%M%Y.00") %>
+#date <%= Time.now.strftime("%m%d%H%M%Y.00") %>
 apt-get update;apt-get -y install build-essential wget
 if [ ! -f /usr/local/bin/chef-client ]; then
   cd /tmp
   wget http://rubyenterpriseedition.googlecode.com/files/ruby-enterprise_1.8.7-2011.03_amd64_ubuntu10.04.deb
   dpkg -i ruby-enterprise_1.8.7-2011.03_amd64_ubuntu10.04.deb
-  wget http://production.cf.rubygems.org/rubygems/rubygems-1.7.2.tgz
-  tar zxf rubygems-1.7.2.tgz
-  cd rubygems-1.7.2
+  wget http://production.cf.rubygems.org/rubygems/rubygems-1.8.21.tgz
+  tar zxf rubygems-1.8.21.tgz
+  cd rubygems-1.8.21
   ruby setup.rb --no-format-executable
 fi
-gem install ohai chef --no-rdoc --no-ri <%= '--prerelease' if @config[:prerelease] %>
+gem install json ohai chef --no-rdoc --no-ri <%= '--prerelease' if @config[:prerelease] %>
 
 mkdir -p /etc/chef
 

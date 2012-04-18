@@ -7,9 +7,9 @@ if [ ! -f /usr/bin/chef-client ]; then
   apt-get update
   apt-get install -y ruby ruby1.8-dev build-essential wget libruby-extras libruby1.8-extras
   cd /tmp
-  wget http://production.cf.rubygems.org/rubygems/rubygems-1.7.2.tgz
-  tar zxf rubygems-1.7.2.tgz
-  cd rubygems-1.7.2
+  wget http://production.cf.rubygems.org/rubygems/rubygems-1.8.21.tgz
+  tar zxf rubygems-1.8.21.tgz
+  cd rubygems-1.8.21
   ruby setup.rb --no-format-executable
 fi
 gem install ohai chef --no-rdoc --no-ri <%= '--prerelease' if @config[:prerelease] %>
@@ -49,6 +49,9 @@ EOP
 ) > /etc/chef/first-boot.json
 
 mkdir -p /etc/ohai/plugins
-mkdir /var/log/chef
+
+if [ ! -d '/var/log/chef' ]; then 
+	mkdir /var/log/chef
+fi
 
 /usr/bin/chef-client -j /etc/chef/first-boot.json'
