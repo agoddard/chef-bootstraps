@@ -42,6 +42,19 @@ environment "<%= Chef::Config[:environment]%>"
 EOP
 ) > /etc/chef/client.rb
 
+
+<% if @chef_config[:encrypted_data_bag_secret] -%>
+(
+cat <<'EOP'
+<%= encrypted_data_bag_secret %>
+EOP
+) > /tmp/encrypted_data_bag_secret
+awk NF /tmp/encrypted_data_bag_secret > /etc/chef/encrypted_data_bag_secret
+rm /tmp/encrypted_data_bag_secret
+<% end -%>
+
+
+
 (
 cat <<'EOP'
 <%= { "run_list" => @run_list }.to_json %>
