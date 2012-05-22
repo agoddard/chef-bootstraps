@@ -65,4 +65,4 @@ if [ ! -d '/var/log/chef' ]; then
 	mkdir /var/log/chef
 fi
 
-/usr/bin/chef-client -j /etc/chef/first-boot.json'
+/usr/local/bin/chef-client -j /etc/chef/first-boot.json'
