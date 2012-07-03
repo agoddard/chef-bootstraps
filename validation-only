@@ -2,7 +2,7 @@ bash -c '
 mkdir -p /etc/chef
 mkdir -p /etc/ohai/plugins
 mkdir -p /var/log/chef
-
+rm /etc/chef/client.pem
 (
 cat <<'EOP'
 <%= IO.read(Chef::Config[:validation_key]) %>
@@ -28,3 +28,4 @@ environment "<%= Chef::Config[:environment]%>"
 <% end %>
 EOP
 ) > /etc/chef/client.rb
+chef-client'
